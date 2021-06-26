@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             // Проверка на пустое введенное имя пользователя
             if (text?.text?.trim()?.equals("")!!) {
                 Toast.makeText(this, "Введите имя пользователя.", Toast.LENGTH_LONG).show()
-                Log.i(TAG, "Empty queryll ")
+                Log.i(TAG, "Empty query")
             } else {
                 // Создаем и сохраняем в лист данные
                 val usersList: List<User> = Data().createUsers()
