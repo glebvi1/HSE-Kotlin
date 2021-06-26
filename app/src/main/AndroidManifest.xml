@@ -18,6 +18,8 @@
         </activity>
 
         <activity android:name=".activity.RepositoryActivity" />
+
+        <activity android:name=".activity.UserActivity" />
     </application>
 
 </manifest>

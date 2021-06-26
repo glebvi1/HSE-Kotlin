@@ -18,7 +18,6 @@ class RepositoryActivity : AppCompatActivity() {
     private var text: EditText? = null
     private var btn: Button? = null
     private var result: TextView? = null
-    private var intentBtn: Button? = null
     private val TAG: String = "HSE-KOTLIN"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +27,6 @@ class RepositoryActivity : AppCompatActivity() {
         text = findViewById(R.id.reposName)
         btn = findViewById(R.id.user_btn)
         result = findViewById(R.id.result)
-        intentBtn = findViewById(R.id.intent_btn)
 
         // Действия при нажатие на книпку "Найти"
         btn?.setOnClickListener{
@@ -70,15 +68,6 @@ class RepositoryActivity : AppCompatActivity() {
                 }
             }
         }
-
-        // Действия при нажатие на кнопку "Пользователи"
-        // Осуществляется переход на новое окно, в котором есть возможность искать репозитории по их названиям
-        // Создаем Intent с переходом на активность MainActivity
-        intentBtn?.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-
     }
 
 }
