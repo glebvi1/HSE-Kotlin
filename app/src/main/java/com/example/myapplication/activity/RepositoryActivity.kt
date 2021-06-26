@@ -1,12 +1,8 @@
 package com.example.myapplication.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.R
 import com.example.myapplication.data.Data
@@ -15,59 +11,64 @@ import com.example.myapplication.models.User
 
 class RepositoryActivity : AppCompatActivity() {
 
-    private var text: EditText? = null
-    private var btn: Button? = null
-    private var result: TextView? = null
     private val TAG: String = "HSE-KOTLIN"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repository)
 
-        text = findViewById(R.id.reposName)
-        btn = findViewById(R.id.user_btn)
-        result = findViewById(R.id.result)
+        val text: EditText = findViewById(R.id.reposName)
+        val btn: Button = findViewById(R.id.user_btn)
+        val listView: ListView = findViewById(R.id.list_repos)
 
         // Действия при нажатие на книпку "Найти"
-        btn?.setOnClickListener{
+        btn.setOnClickListener{
             // Проверка на пустое введенное название репозитория
-            if (text?.text?.trim()?.equals("")!!) {
+            if (text.text?.trim()?.equals("")!!) {
                 Toast.makeText(this, "Введите название репозитория.", Toast.LENGTH_LONG).show()
                 Log.i(TAG, "Empty query")
             } else {
                 // Создаем и сохраняем в лист данные
                 val usersList: List<User> = Data().createUsers()
 
-                // Строка, введенная пользователем. Уже точно != null
-                val reposName: String = text?.text.toString()
+                // Строка, введенная пользователем. Уже точно != ""
+                val reposName: String = text.text.toString()
 
                 // Создаем список всех репозиториев
-                val reposList: MutableList<Repository> = mutableListOf()
-                for (user in usersList) {
-                    for (repo in user.repositories) {
-                        reposList.add(repo)
-                    }
-                }
+                val reposList: MutableList<Repository> = Data().getAllRepositories()
 
                 // Фильтруем их по названию
                 val chosenRepos: List<Repository> = reposList.filter { it.name == reposName }
 
-                // Проверка на существование пользователей с таким именем
+                // Проверка на существование репозиториев с таким названием
                 if (chosenRepos.isEmpty()) {
                     Toast.makeText(this, "Репозитория с таким названием не найдено.", Toast.LENGTH_LONG).show()
                 } else {
                     Log.i(TAG, chosenRepos[0].toString())
 
-                    // Отбор всех репозиториев по названию
-                    var allRepos: String = ""
+                    // Названия выбранных репозиториев
+                    val chosenReposString: MutableList<String> = mutableListOf()
+
                     for (repo in chosenRepos) {
-                        allRepos += repo.getInfo(true) + "\n"
+                        chosenReposString.add(repo.name)
                     }
 
-                    result?.text = allRepos
+                    // Создания адаптера
+                    val arrayAdapter: ArrayAdapter<String> = ArrayAdapter(
+                        this, android.R.layout.simple_list_item_1, chosenReposString
+                    )
+
+                    listView.adapter = arrayAdapter
+
+                    // Доп. информация по нажатию на ячейку (item)
+                    listView.setOnItemClickListener{ adapterView, view, i, l ->
+                        UserActivity().createAlertDialog(
+                            chosenRepos[i].lang,
+                            chosenRepos[i].description + "\n" + chosenRepos[i].userName,
+                        this)
+                    }
                 }
             }
         }
     }
-
 }

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     tools:context=".activity.RepositoryActivity">
 
     <TextView
@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/search_by_repos_name"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="30sp"
         android:textAlignment="center"
         android:fontFamily="sans-serif-light"
@@ -27,8 +27,8 @@
         android:backgroundTint="@color/teal_200"
         android:layout_marginTop="100sp"
         android:layout_marginHorizontal="50sp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
         android:hint="@string/input_repos_name"
         android:fontFamily="sans-serif-light"/>
 
@@ -43,11 +43,10 @@
         android:backgroundTint="@color/teal_200"
         android:text="@string/search"/>
 
-    <TextView
-        android:id="@+id/result"
+    <ListView
+        android:id="@+id/list_repos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
         android:textSize="30sp"
         android:textAlignment="center"
         android:fontFamily="sans-serif-light"

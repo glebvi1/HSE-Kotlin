@@ -5,7 +5,7 @@ import com.example.myapplication.models.User
 
 class Data {
 
-    // Ф-ия, создающая пользователей с репозиториями
+    // Создание пользователей с репозиториями
     fun createUsers(): List<User> {
         val reposForUser1 = listOf(
             Repository(name = "HelloWorld", description = "I'll be a next Hokage of this programming world", lang = "Kotlin", userName = "User1"),
@@ -22,30 +22,15 @@ class Data {
         return listOf(User("User1", reposForUser1), User("User2", reposForUser2), User("User3", reposForUser3))
     }
 
-/*    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        // Данные
-        val usersList: List<User> = createUsers()
-
-        // Заданые значения
-        val userName: String = ""
-        val reposName: String = ""
-
-        // Фильтрация пользователей по имени
-        val chosenUser: List<User> = usersList.filter { user -> user.name == userName }
-
-        val chosenRepos: MutableList<Repository> = mutableListOf<Repository>()
-
-        // Фильтрация репозиториев по названию
-        for (user in usersList) {
-            // Для каждого пользователя находим репозиторий с заданым названием (если он есть)
-            for (repos in user.repositories.filter { repos -> repos.name == reposName }) {
-                chosenRepos.add(repos)
+    // Получить все репозитории
+    fun getAllRepositories(): MutableList<Repository> {
+        val reposList: MutableList<Repository> = mutableListOf()
+        for (user in Data().createUsers()) {
+            for (repo in user.repositories) {
+                reposList.add(repo)
             }
         }
-    }*/
 
-
+        return reposList
+    }
 }
