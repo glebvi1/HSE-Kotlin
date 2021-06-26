@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">HSE-Kotlin</string>
-    <string name="search_by_username">Поиск по имени пользователя</string>
+    <string name="search_by_username">Поиск пользователей</string>
     <string name="input_username">Введите имя пользователя</string>
-    <string name="intent_to_repos">Репозитории</string>
-    <string name="search_by_repos_name">Поиск по названию репозитория</string>
+    <string name="intent_to_users">Пользователи</string>
+    <string name="search_by_repos_name">Поиск репозиториев</string>
     <string name="input_repos_name">Введите название репозитория</string>
+    <string name="intent_to_repos">Репозитории</string>
     <string name="search">Найти</string>
 </resources>

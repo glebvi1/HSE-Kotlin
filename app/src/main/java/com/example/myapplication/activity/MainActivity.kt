@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
                     // Отбор всех пользователей по имени
                     var allUsers: String = ""
                     for (user in chosenUser) {
-                        allUsers += user.name + ": "
                         for (repo in user.repositories) {
                             allUsers += repo.getInfo() + "\n"
                         }
