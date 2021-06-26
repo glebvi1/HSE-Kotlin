@@ -21,21 +21,18 @@ class RepositoryActivity : AppCompatActivity() {
         val btn: Button = findViewById(R.id.user_btn)
         val listView: ListView = findViewById(R.id.list_repos)
 
+        // Создаем список всех репозиториев
+        val reposList: MutableList<Repository> = Data().getAllRepositories()
+
         // Действия при нажатие на книпку "Найти"
         btn.setOnClickListener{
             // Проверка на пустое введенное название репозитория
-            if (text.text?.trim()?.equals("")!!) {
+            if (text.text.trim().equals("")) {
                 Toast.makeText(this, "Введите название репозитория.", Toast.LENGTH_LONG).show()
                 Log.i(TAG, "Empty query")
             } else {
-                // Создаем и сохраняем в лист данные
-                val usersList: List<User> = Data().createUsers()
-
                 // Строка, введенная пользователем. Уже точно != ""
                 val reposName: String = text.text.toString()
-
-                // Создаем список всех репозиториев
-                val reposList: MutableList<Repository> = Data().getAllRepositories()
 
                 // Фильтруем их по названию
                 val chosenRepos: List<Repository> = reposList.filter { it.name == reposName }

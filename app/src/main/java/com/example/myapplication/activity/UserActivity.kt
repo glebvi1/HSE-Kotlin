@@ -25,6 +25,9 @@ class UserActivity : AppCompatActivity() {
         val btn: Button = findViewById(R.id.user_btn)
         val listView: ListView = findViewById(R.id.list_users)
 
+        // Создаем и сохраняем в лист данные
+        val usersList: List<User> = Data().createUsers()
+
         // Действия при нажатие на книпку "Найти"
         btn.setOnClickListener{
             // Проверка на пустое введенное имя пользователя
@@ -32,21 +35,18 @@ class UserActivity : AppCompatActivity() {
                 Toast.makeText(this, "Введите имя пользователя.", Toast.LENGTH_LONG).show()
                 Log.i(TAG, "Empty query")
             } else {
-                // Создаем и сохраняем в лист данные
-                val usersList: List<User> = Data().createUsers()
-
                 // Строка, введенная пользователем. Уже точно != ""
                 val userName: String = text.text.toString()
+                Log.i(TAG, userName)
 
                 // Фильтрация пользователей по имени (имя/логин каждого пользователя уникальны)
-                val chosenUserList: List<User> = usersList.filter { user -> user.name == userName }
+                val chosenUserList: List<User> = usersList.filter { it.name == userName }
 
                 // Проверка на существование пользователей с таким именем
                 if (chosenUserList.isEmpty()) {
                     Toast.makeText(this, "Пользователей с таким именем не найдено.", Toast.LENGTH_LONG).show()
                 } else {
-
-                    val chosenUser: User = usersList[0]
+                    val chosenUser: User = chosenUserList[0]
 
                     Log.i(TAG, chosenUser.toString())
 
